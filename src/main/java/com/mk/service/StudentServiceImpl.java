@@ -20,7 +20,7 @@ public class StudentServiceImpl implements StudentService{
     @Override
     @Transactional
     public List<Student> findAll() {
-        return null;
+        return this.studentDAO.findAll();
     }
 
     @Override
