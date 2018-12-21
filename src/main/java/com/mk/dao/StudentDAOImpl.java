@@ -12,6 +12,35 @@ import java.util.List;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
+    @Override
+    public Student findById(int id) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Student student =
+                session.get(Student.class, id);
+
+        return student;
+    }
+
+    @Override
+    public void save(Student student) {
+
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(student);
+    }
+
+    @Override
+    public void deleteById(int id) {
+
+        Session session = entityManager.unwrap(Session.class);
+        Query query =
+                session.createQuery(
+                        "delete from Student where id=:studentID"
+                );
+
+        query.setParameter("studentID", id);
+        query.executeUpdate();
+    }
 
     private EntityManager entityManager;
 
